@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usmania Model School and College Bara</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- Color Variables based on Logo --- */
+        :root {
+            --primary-blue: #09355C; /* Logo Crescent Blue */
+            --secondary-red: #A31E22; /* Logo Ribbon Red */
+            --accent-green: #00A651; /* Logo Star Green */
+            --accent-gold: #FDB913; /* Logo Ribbon Corners */
+            --text-dark: #333333;
+            --text-light: #FFFFFF;
+            --bg-light: #F8F9FA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+            background-color: var(--bg-light);
+        }
+
+        /* --- Topbar --- */
+        .topbar {
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 5%;
+            font-size: 13px;
+        }
+
+        .topbar-info span {
+            margin-right: 20px;
+        }
+        
+        .topbar-info i {
+            margin-right: 5px;
+            color: var(--accent-gold);
+        }
+
+        .topbar-social a {
+            color: var(--text-light);
+            margin-left: 15px;
+            transition: 0.3s;
+        }
+
+        .topbar-social a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: var(--text-light);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-container img {
+            width: 70px;
+            height: auto;
+        }
+
+        .logo-text h1 {
+            font-size: 20px;
+            color: var(--primary-blue);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .logo-text p {
+            font-size: 12px;
+            color: var(--secondary-red);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* Desktop Navigation */
+        .desktop-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        .desktop-nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 15px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .desktop-nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary-red);
+            transition: 0.3s;
+        }
+
+        .desktop-nav a:hover {
+            color: var(--secondary-red);
+        }
+
+        .desktop-nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Header Buttons & Toggle */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .login-btn {
+            background-color: var(--secondary-red);
+            color: var(--text-light);
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .login-btn:hover {
+            background-color: var(--primary-blue);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        /* --- Sliding Mobile Menu --- */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1001;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 280px;
+            height: 100vh;
+            background-color: var(--text-light);
+            z-index: 1002;
+            padding: 30px 20px;
+            transition: right 0.4s ease;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .close-menu {
+            font-size: 24px;
+            color: var(--secondary-red);
+            cursor: pointer;
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+        }
+
+        .mobile-nav ul li {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .mobile-nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 16px;
+            font-weight: 600;
+            display: block;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--secondary-red);
+        }
+
+        /* --- Hero Slider (16:9 approx) --- */
+        .hero-slider-container {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        /* Dark Overlay for Text Readability */
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(9, 53, 92, 0.3); /* Opacity reduced for better image visibility */
+        }
+
+        .slide-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--text-light);
+            z-index: 10;
+            width: 80%;
+        }
+
+        .slide-content h2 {
+            font-size: 45px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: slideUp 1s ease forwards;
+        }
+
+        .slide-content p {
+            font-size: 20px;
+            margin-bottom: 25px;
+            color: var(--accent-gold);
+            font-weight: 600;
+            animation: slideUp 1.2s ease forwards;
+        }
+
+        .slider-btn {
+            background-color: var(--accent-green);
+            color: var(--text-light);
+            padding: 12px 30px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: 0.3s;
+            animation: slideUp 1.4s ease forwards;
+            display: inline-block;
+        }
+
+        .slider-btn:hover {
+            background-color: var(--text-light);
+            color: var(--accent-green);
+        }
+
+        /* Slider Controls */
+        .slider-nav {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background-color: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .dot.active {
+            background-color: var(--accent-gold);
+            transform: scale(1.3);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 991px) {
+            .desktop-nav { display: none; }
+            .menu-toggle { display: block; }
+            .login-btn { display: none; } /* Move to mobile menu */
+            .logo-text h1 { font-size: 16px;  }
+            .slide-content h2 { font-size: 30px; }
+            .slide-content p { font-size: 16px; }
+            .hero-slider-container { height: 60vh; }
+            .topbar { flex-direction: column; gap: 10px; text-align: center; }
+        }
+        /* --- Part 2: Trust Badges Section --- */
+        .trust-badges-section {
+            padding: 60px 5%;
+            background-color: #FFFFFF; /* Clean white background */
+            position: relative;
+            z-index: 10;
+            margin-top: -40px; /* Thora slider ke upar overlap karne ke liye */
+        }
+
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .trust-badge-card {
+            background-color: var(--text-light);
+            padding: 35px 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* Soft shadow */
+            transition: all 0.3s ease;
+            border-bottom: 4px solid var(--primary-blue);
+        }
+
+        .trust-badge-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            border-bottom-color: var(--secondary-red);
+        }
+
+        .badge-icon {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(9, 53, 92, 0.08); /* Light blue bg */
+            color: var(--primary-blue);
+            font-size: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px auto;
+            transition: all 0.3s ease;
+        }
+
+        .trust-badge-card:hover .badge-icon {
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            transform: scale(1.1);
+        }
+
+        .trust-badge-card h3 {
+            font-size: 20px;
+            color: var(--primary-blue);
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .trust-badge-card p {
+            font-size: 14.5px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Responsive Grid */
+        @media (max-width: 991px) {
+            .trust-badges-section { margin-top: 0; padding: 50px 5%; }
+            .badges-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        }
+
+        @media (max-width: 576px) {
+            .badges-grid { grid-template-columns: 1fr; } /* Mobile par ek line mein 1 badge */
+            .trust-badge-card { padding: 25px 15px; }
+        }
+        /* --- Part 3: About Us Section --- */
+        .about-section {
+            padding: 80px 5%;
+            background-color: var(--bg-light); /* Light gray background */
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Subtle Watermark Icon in background */
+        .about-section::before {
+            content: '\f518'; /* FontAwesome book-open */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            right: -5%;
+            transform: translateY(-50%);
+            font-size: 350px;
+            color: rgba(9, 53, 92, 0.03); /* Faint blue */
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-image-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        .about-image-wrapper img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Decorative Background Box behind image */
+        .about-image-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 3px solid var(--primary-blue);
+            border-radius: 15px;
+            z-index: 0;
+        }
+
+        .established-badge {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background-color: var(--secondary-red);
+            color: var(--text-light);
+            padding: 15px 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(163, 30, 34, 0.3);
+            border: 4px solid var(--text-light);
+            z-index: 2;
+        }
+
+        .established-badge span {
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: -2px;
+        }
+
+        .established-badge strong {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .about-content {
+            flex: 1;
+        }
+
+        .about-subtitle {
+            color: var(--secondary-red);
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .about-title {
+            color: var(--primary-blue);
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .about-desc {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        /* Premium Quote Box */
+        .principal-quote {
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-left: 5px solid var(--accent-gold);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .quote-icon {
+            color: var(--accent-gold);
+            font-size: 30px;
+            opacity: 0.5;
+        }
+
+        .quote-text p {
+            font-size: 15px;
+            font-style: italic;
+            color: #444;
+            margin-bottom: 5px;
+        }
+
+        .quote-text h5 {
+            font-size: 14px;
+            color: var(--primary-blue);
+            font-weight: 700;
+        }
+
+        .about-btn {
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            padding: 12px 28px;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .about-btn:hover {
+            background-color: var(--secondary-red);
+            color: var(--text-light);
+        }
+
+        /* Responsive */
+        @media (max-width: 991px) {
+            .about-container { flex-direction: column; gap: 50px; }
+            .about-image-wrapper::after { left: 10px; top: 15px; width: calc(100% - 20px); }
+            .established-badge { right: 10px; }
+            .about-title { font-size: 28px; }
+        }
+        /* --- Part 4: Campus Tour Video Section (16:9 Landscape) --- */
+        .video-section {
+            padding: 80px 5%;
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            text-align: center;
+            position: relative;
+        }
+
+        .video-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.05) 0%, transparent 50%),
+                              radial-gradient(circle at 80% 50%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .video-text-container {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 40px;
+        }
+
+        .video-subtitle {
+            color: var(--accent-gold);
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .video-title {
+            font-size: 36px;
+            font-weight: 700;
+        }
+
+        /* Standard 16:9 Aspect Ratio Container */
+        .video-frame-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            border: 4px solid var(--accent-gold);
+            z-index: 1;
+            background-color: #000;
+        }
+
+        .video-frame-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        @media (max-width: 991px) {
+            .video-title { font-size: 28px; }
+            .video-section { padding: 60px 5%; }
+        }
+        /* --- Part 4.5: Campus Gallery & CTA Section --- */
+        .gallery-section {
+            padding: 80px 5%;
+            background-color: var(--bg-light);
+            text-align: center;
+        }
+
+        .gallery-header {
+            margin-bottom: 40px;
+        }
+
+        .gallery-subtitle {
+            color: var(--secondary-red);
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .gallery-title {
+            color: var(--primary-blue);
+            font-size: 36px;
+            font-weight: 700;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            max-width: 1200px;
+            margin: 0 auto 50px auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            aspect-ratio: 1 / 1;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to top, rgba(9,53,92,0.6), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        /* CTA Banner */
+        .admission-cta {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: var(--primary-blue);
+            border-radius: 15px;
+            padding: 40px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 15px 40px rgba(9, 53, 92, 0.2);
+            position: relative;
+            overflow: hidden;
+            border-bottom: 5px solid var(--accent-gold);
+        }
+
+        .admission-cta::before {
+            content: '\f518';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 10%;
+            top: -20px;
+            font-size: 150px;
+            color: rgba(255,255,255,0.05);
+            transform: rotate(-15deg);
+            pointer-events: none;
+        }
+
+        .cta-text {
+            text-align: left;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-text h2 {
+            color: var(--text-light);
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .cta-text p {
+            color: var(--accent-gold);
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* CTA Buttons Wrapper */
+        .cta-actions {
+            display: flex;
+            gap: 15px;
+            position: relative;
+            z-index: 1;
+            align-items: center;
+        }
+
+        .cta-btn {
+            background-color: var(--secondary-red);
+            color: var(--text-light);
+            padding: 15px 30px;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 700;
+            border-radius: 8px;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(163, 30, 34, 0.4);
+        }
+
+        .cta-btn:hover {
+            background-color: var(--accent-gold);
+            color: var(--primary-blue);
+            box-shadow: 0 8px 20px rgba(253, 185, 19, 0.4);
+        }
+
+        /* Facebook Secondary Button */
+        .fb-btn {
+            background-color: #FFFFFF;
+            color: #1877F2; /* Official Facebook Blue */
+            padding: 15px 25px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 8px;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .fb-btn:hover {
+            background-color: #1877F2;
+            color: #FFFFFF;
+            box-shadow: 0 8px 20px rgba(24, 119, 242, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 991px) {
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .admission-cta { flex-direction: column; text-align: center; gap: 25px; padding: 35px 20px; }
+            .cta-text { text-align: center; }
+            .cta-actions { flex-wrap: wrap; justify-content: center; }
+            .gallery-title { font-size: 28px; }
+            .cta-text h2 { font-size: 26px; }
+        }
+        /* --- Part 5: Professional Footer --- */
+        .site-footer {
+            background-color: #05223D; /* Darker shade of Primary Blue for footer */
+            color: #E0E0E0;
+            padding: 70px 5% 20px 5%;
+            position: relative;
+            font-size: 15px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1.5fr 1.5fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 50px auto;
+        }
+
+        /* Column 1: About School */
+        .footer-about .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .footer-about .footer-logo img {
+            width: 60px;
+            background-color: var(--text-light);
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .footer-about .footer-logo h2 {
+            color: var(--text-light);
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .footer-about p {
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: #B0C4DE;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-socials a {
+            background-color: rgba(255,255,255,0.1);
+            color: var(--text-light);
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-socials a:hover {
+            background-color: var(--accent-gold);
+            color: var(--primary-blue);
+            transform: translateY(-3px);
+        }
+
+        /* Footer Headings */
+        .footer-col h3 {
+            color: var(--text-light);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--secondary-red);
+        }
+
+        /* Column 2: Quick Links */
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links ul li a {
+            color: #B0C4DE;
+            text-decoration: none;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links ul li a i {
+            font-size: 12px;
+            color: var(--secondary-red);
+            transition: 0.3s;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--accent-gold);
+            padding-left: 5px;
+        }
+
+        .footer-links ul li a:hover i {
+            color: var(--accent-gold);
+        }
+
+        /* Column 3: Contact Info */
+        .footer-contact ul {
+            list-style: none;
+        }
+
+        .footer-contact ul li {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+            color: #B0C4DE;
+            line-height: 1.5;
+        }
+
+        .footer-contact ul li i {
+            color: var(--accent-gold);
+            font-size: 18px;
+            margin-top: 3px;
+        }
+
+        /* Column 4: Newsletter */
+        .footer-newsletter p {
+            color: #B0C4DE;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .newsletter-form input {
+            padding: 12px 15px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .newsletter-form button {
+            padding: 12px 15px;
+            background-color: var(--secondary-red);
+            color: var(--text-light);
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            background-color: var(--accent-gold);
+            color: var(--primary-blue);
+        }
+
+        /* Footer Bottom Bar */
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: #889CBA;
+        }
+
+        .footer-bottom a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-bottom a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 991px) {
+            .footer-container { grid-template-columns: 1fr 1fr; gap: 40px; }
+        }
+
+        @media (max-width: 768px) {
+            .footer-container { grid-template-columns: 1fr; gap: 30px; }
+            .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+        }
+        
+    </style>
+</head>
+<body>
+
+    <!-- Topbar -->
+    <div class="topbar">
+        <div class="topbar-info">
+            <span><i class="fas fa-phone-alt"></i> +92 303 3333604</span>
+            <span><i class="fas fa-envelope"></i> info@usmaniamodelschool.edu.pk</span>
+        </div>
+        <div class="topbar-social">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="mainHeader">
+        <div class="logo-container">
+            <img src="media/logo.webp" fetchpriority="high" alt="Logo">
+            <div class="logo-text">
+                <h1>Usmania Model School</h1>
+                <p>& College Bara</p>
+            </div>
+        </div>
+
+        <nav class="desktop-nav">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Admissions</a></li>
+                <li><a href="#">Academics</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-actions">
+            <a href="#" class="login-btn"><i class="fas fa-user-circle"></i> Portal Login</a>
+            <i class="fas fa-bars menu-toggle" id="menuToggle"></i>
+        </div>
+    </header>
+
+    <!-- Mobile Sliding Menu -->
+    <div class="mobile-menu-overlay" id="menuOverlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="close-menu"><i class="fas fa-times" id="closeMenu"></i></div>
+        <nav class="mobile-nav">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Admissions</a></li>
+                <li><a href="#">Academics</a></li>
+                <li><a href="#">Notice Board</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <a href="#" class="login-btn" style="display: flex; justify-content: center; margin-top: 20px;"><i class="fas fa-user-circle"></i> Portal Login</a>
+        </nav>
+    </div>
+
+    <!-- Hero Slider -->
+    <section class="hero-slider-container">
+        <!-- Slide 1 -->
+        <div class="slide active" style="background-image: url('media/hero_1.webp');">
+            <div class="slide-content">
+                <h2>Welcome to Usmania Model School</h2>
+                <p>High Morale Since 1996</p>
+                <a href="#" class="slider-btn">Apply for Admission</a>
+            </div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="slide" style="background-image: url('media/hero_2.webp');">
+            <div class="slide-content">
+                <h2>Excellence in Education</h2>
+                <p>Building a Brighter Future for Your Child</p>
+                <a href="#" class="slider-btn">Explore Academics</a>
+            </div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="slide" style="background-image: url('media/hero_3.webp');">
+            <div class="slide-content">
+                <h2>State-of-the-Art Facilities</h2>
+                <p>Providing the Best Environment to Grow</p>
+                <a href="#" class="slider-btn">Discover Campus</a>
+            </div>
+        </div>
+
+        <div class="slider-nav">
+            <div class="dot active" onclick="currentSlide(0)"></div>
+            <div class="dot" onclick="currentSlide(1)"></div>
+            <div class="dot" onclick="currentSlide(2)"></div>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script>
+        // --- Mobile Menu Toggle ---
+        const menuToggle = document.getElementById('menuToggle');
+        const closeMenu = document.getElementById('closeMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+
+        function openMenu() {
+            mobileMenu.classList.add('active');
+            menuOverlay.style.display = 'block';
+            setTimeout(() => menuOverlay.style.opacity = '1', 10);
+        }
+
+        function closeMenuFunc() {
+            mobileMenu.classList.remove('active');
+            menuOverlay.style.opacity = '0';
+            setTimeout(() => menuOverlay.style.display = 'none', 300);
+        }
+
+        menuToggle.addEventListener('click', openMenu);
+        closeMenu.addEventListener('click', closeMenuFunc);
+        menuOverlay.addEventListener('click', closeMenuFunc);
+
+        // --- Sticky Header on Scroll ---
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('mainHeader');
+            if (window.scrollY > 50) {
+                header.style.padding = '10px 5%';
+            } else {
+                header.style.padding = '15px 5%';
+            }
+        });
+
+        // --- Hero Slider Logic ---
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        let slideInterval;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slideIndex = n;
+            if (slideIndex >= slides.length) slideIndex = 0;
+            if (slideIndex < 0) slideIndex = slides.length - 1;
+
+            slides[slideIndex].classList.add('active');
+            dots[slideIndex].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(slideIndex + 1);
+        }
+
+        function currentSlide(n) {
+            showSlide(n);
+            resetInterval();
+        }
+
+        function startInterval() {
+            slideInterval = setInterval(nextSlide, 5000); // 5 seconds auto-slide
+        }
+
+        function resetInterval() {
+            clearInterval(slideInterval);
+            startInterval();
+        }
+
+        // Initialize Slider
+        startInterval();
+    </script>
+    <!-- --- Part 2: Trust Badges (Core Features) --- -->
+    <section class="trust-badges-section">
+        <div class="badges-grid">
+            
+            <!-- Badge 1 -->
+            <div class="trust-badge-card">
+                <div class="badge-icon"><i class="fas fa-book-open"></i></div>
+                <h3>Quality Education</h3>
+                <p>Modern curriculum focusing on deep conceptual learning and academic brilliance.</p>
+            </div>
+
+            <!-- Badge 2 -->
+            <div class="trust-badge-card">
+                <div class="badge-icon"><i class="fas fa-mountain"></i></div>
+                <h3>High Morale</h3>
+                <p>Instilling strong ethical values and discipline to shape responsible citizens.</p>
+            </div>
+
+            <!-- Badge 3 -->
+            <div class="trust-badge-card">
+                <div class="badge-icon"><i class="fas fa-user-graduate"></i></div>
+                <h3>Expert Faculty</h3>
+                <p>Highly qualified and dedicated teaching staff committed to student success.</p>
+            </div>
+
+            <!-- Badge 4 -->
+            <div class="trust-badge-card">
+                <div class="badge-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Trusted Since 1996</h3>
+                <p>Over 28 years of academic excellence and unwavering trust in Bara.</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- --- Part 4: Campus Tour Video Section (16:9 Landscape) --- -->
+    <section class="video-section">
+        <div class="video-text-container">
+            <span class="video-subtitle">Campus Life</span>
+            <h2 class="video-title">Glimpse of Our Excellence</h2>
+        </div>
+        
+        <div class="video-frame-container">
+            <!-- Facebook Video Iframe (Custom buttons removed, using built-in FB controls) -->
+            <!-- autoplay=1 and mute=1 added for best chance of auto-playing without browser blocks -->
+            <iframe 
+                src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1465549082381914&show_text=false&t=11&autoplay=1&mute=1" 
+                scrolling="no" 
+                frameborder="0" 
+                allowfullscreen="true" 
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+            </iframe>
+        </div>
+    </section>
+    <!-- --- Part 3: About Us Section --- -->
+    <section class="about-section">
+        <div class="about-container">
+            <!-- Left: Image & Badge -->
+            <div class="about-image-wrapper">
+                <img src="media/about.webp" alt="Usmania Model School Campus">
+                <div class="established-badge">
+                    <span>Established</span>
+                    <strong>1996</strong>
+                </div>
+            </div>
+            
+            <!-- Right: Content -->
+            <div class="about-content">
+                <span class="about-subtitle">Welcome to Our Institution</span>
+                <h2 class="about-title">Nurturing High Morale & Academic Excellence</h2>
+                <p class="about-desc">At <strong>Usmania Model School and College Bara</strong>, we are committed to providing a transformative educational journey. For over two decades, we have focused on building character, fostering intellect, and preparing our students to conquer future challenges with confidence and discipline.</p>
+                
+                <!-- Principal's Quote -->
+                <div class="principal-quote">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <div class="quote-text">
+                        <p>"Education is not just about academic success; it's about shaping high morale and visionary leaders for tomorrow."</p>
+                        <h5>- Principal, Usmania Model School</h5>
+                    </div>
+                </div>
+                
+                <a href="#" class="about-btn">Discover More About Us <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+    <!-- --- Part 4.5: Campus Gallery & Admission CTA --- -->
+    <section class="gallery-section">
+        <div class="gallery-header">
+            <span class="gallery-subtitle">Our Campus</span>
+            <h2 class="gallery-title">Life at Usmania Model School</h2>
+        </div>
+
+        <!-- Image Gallery Grid -->
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="media/gallery_1.webp" alt="Students"></div>
+            <div class="gallery-item"><img src="media/gallery_2.webp" alt="Library"></div>
+            <div class="gallery-item"><img src="media/gallery_3.webp" alt="Classroom"></div>
+            <div class="gallery-item"><img src="media/gallery_4.webp" alt="Activities"></div>
+        </div>
+
+        <!-- Admission CTA Banner -->
+        <div class="admission-cta">
+            <div class="cta-text">
+                <h2>Ready to Build a Bright Future?</h2>
+                <p>Admissions are now open for the current academic session.</p>
+            </div>
+            <div class="cta-actions">
+                <a href="https://www.facebook.com/UMSC.pk/" target="_blank" class="fb-btn">
+                    <i class="fab fa-facebook-f"></i> Follow Us
+                </a>
+                <a href="#" class="cta-btn">Apply For Admission <i class="fas fa-paper-plane"></i></a>
+               
+            </div>
+        </div>
+    </section>
+    <!-- --- Part 5: Site Footer --- -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            
+            <!-- Col 1: About -->
+            <div class="footer-col footer-about">
+                <div class="footer-logo">
+                    <!-- Replace media/logo.jpg with your actual logo path -->
+                    <img src="media/logo.webp" alt="School Logo">
+                    <h2>Usmania Model School<br>& College Bara</h2>
+                </div>
+                <p>Nurturing high morale and academic excellence since 1996. We are committed to building a brighter future for your child with quality education and state-of-the-art facilities.</p>
+                <div class="footer-socials">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <!-- Col 2: Quick Links -->
+            <div class="footer-col footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Portal Login</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Admissions</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Academics</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Fee Structure</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Notice Board</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 3: Contact Info -->
+            <div class="footer-col footer-contact">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Usmania Model School & College, Main Road Bara, Khyber Pakhtunkhwa.</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone-alt"></i>
+                        <span>+92 300 1234567<br>+92 311 7654321</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <span>info@usmaniamodelschool.edu.pk</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Col 4: Newsletter -->
+            <div class="footer-col footer-newsletter">
+                <h3>Stay Updated</h3>
+                <p>Subscribe to our newsletter to receive the latest updates, exam schedules, and news directly in your inbox.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address" required>
+                    <button type="submit">Subscribe Now</button>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="footer-bottom">
+            <div>&copy; 2026 Usmania Model School & College Bara. All Rights Reserved.</div>
+            <div>Designed & Developed by <a href="https://softpehchan.com" target="_blank">SoftPehchan IT Services</a></div>
+        </div>
+    </footer>
+</body>
+</html>
